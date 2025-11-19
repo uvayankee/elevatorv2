@@ -49,4 +49,9 @@ public class StepDefinitions {
     public void the_doors_should_be_closed() {
         assertFalse(elevator.areDoorsOpen());
     }
+
+    @io.cucumber.java.en.When("I call the elevator to floor {int} to go {word}")
+    public void i_call_the_elevator_to_floor_to_go(Integer floor, String direction) {
+        elevator.call(floor, com.elevator.Direction.valueOf(direction));
+    }
 }
