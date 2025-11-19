@@ -30,4 +30,33 @@ public class Elevator {
         }
         return floors;
     }
+
+    private Integer targetFloor = null;
+
+    public void requestFloor(int floor) {
+        if (floor >= 1 && floor <= maxFloor) {
+            this.targetFloor = floor;
+        }
+    }
+
+    public void step() {
+        if (targetFloor == null) {
+            return;
+        }
+
+        if (doorsOpen) {
+            if (currentFloor != targetFloor) {
+                doorsOpen = false;
+            }
+        } else {
+            if (currentFloor < targetFloor) {
+                currentFloor++;
+            } else if (currentFloor > targetFloor) {
+                currentFloor--;
+            } else {
+                doorsOpen = true;
+                targetFloor = null; // Request fulfilled
+            }
+        }
+    }
 }

@@ -34,4 +34,19 @@ public class StepDefinitions {
         assertTrue(floors.contains(min));
         assertTrue(floors.contains(max));
     }
+
+    @io.cucumber.java.en.When("I request floor {int}")
+    public void i_request_floor(Integer floor) {
+        elevator.requestFloor(floor);
+    }
+
+    @io.cucumber.java.en.When("I tell the elevator to step")
+    public void i_tell_the_elevator_to_step() {
+        elevator.step();
+    }
+
+    @Then("the doors should be closed")
+    public void the_doors_should_be_closed() {
+        assertFalse(elevator.areDoorsOpen());
+    }
 }
