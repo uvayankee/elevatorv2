@@ -54,4 +54,39 @@ public class StepDefinitions {
     public void i_call_the_elevator_to_floor_to_go(Integer floor, String direction) {
         elevator.call(floor, com.elevator.Direction.valueOf(direction));
     }
+
+    private Thread elevatorThread;
+
+    @Given("the elevator is running in a thread")
+    public void the_elevator_is_running_in_a_thread() {
+        elevator.start();
+        elevatorThread = new Thread(() -> {
+            while (elevator.isRunning()) {
+                elevator.step();
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+        });
+        elevatorThread.start();
+    }
+
+    @io.cucumber.java.en.When("I wait for {int} milliseconds")
+    public void i_wait_for_milliseconds(Integer millis) throws InterruptedException {
+        Thread.sleep(millis);
+    }
+
+    @io.cucumber.java.en.When("I stop the elevator thread")
+    public void i_stop_the_elevator_thread() throws InterruptedException {
+        elevator.stop();
+        elevatorThread.join(1000);
+    }
+
+    @Then("the elevator thread should stop")
+    public void the_elevator_thread_should_stop() {
+        assertFalse(elevatorThread.isAlive());
+    }
 }

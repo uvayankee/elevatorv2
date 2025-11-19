@@ -15,11 +15,11 @@ public class Elevator {
         this.maxFloor = maxFloor;
     }
 
-    public int getCurrentFloor() {
+    public synchronized int getCurrentFloor() {
         return currentFloor;
     }
 
-    public boolean areDoorsOpen() {
+    public synchronized boolean areDoorsOpen() {
         return doorsOpen;
     }
 
@@ -35,6 +35,7 @@ public class Elevator {
     private java.util.Set<Integer> upCalls = new java.util.HashSet<>();
     private java.util.Set<Integer> downCalls = new java.util.HashSet<>();
     private Direction currentDirection = Direction.IDLE;
+    private volatile boolean running = false;
 
     public void requestFloor(int floor) {
         if (floor >= 1 && floor <= maxFloor) {
@@ -52,9 +53,12 @@ public class Elevator {
         }
     }
 
-    public void step() {
+    public synchronized void step() {
         if (doorsOpen) {
-            doorsOpen = false;
+            // Only close doors if we have somewhere to go
+            if (hasAnyRequests()) {
+                doorsOpen = false;
+            }
             return;
         }
 
@@ -73,6 +77,11 @@ public class Elevator {
             currentFloor++;
         } else {
             currentFloor--;
+        }
+
+        // Check if we should stop at the new floor
+        if (shouldStopAt(currentFloor)) {
+            openDoorsAndClearRequests();
         }
     }
 
@@ -165,5 +174,21 @@ public class Elevator {
 
     private boolean hasRequestsAt(int floor) {
         return destinations.contains(floor) || upCalls.contains(floor) || downCalls.contains(floor);
+    }
+
+    private boolean hasAnyRequests() {
+        return !destinations.isEmpty() || !upCalls.isEmpty() || !downCalls.isEmpty();
+    }
+
+    public void start() {
+        running = true;
+    }
+
+    public void stop() {
+        running = false;
+    }
+
+    public boolean isRunning() {
+        return running;
     }
 }

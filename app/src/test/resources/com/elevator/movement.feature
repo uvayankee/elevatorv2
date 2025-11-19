@@ -11,5 +11,4 @@ Feature: Elevator Movement
     Then the elevator should be on floor 2
     When I tell the elevator to step
     Then the elevator should be on floor 3
-    When I tell the elevator to step
-    Then the doors should be open
+    And the doors should be open
