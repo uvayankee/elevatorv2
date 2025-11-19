@@ -21,4 +21,17 @@ public class StepDefinitions {
     public void the_doors_should_be_open() {
         assertTrue(elevator.areDoorsOpen());
     }
+
+    @Given("the elevator is initialized with {int} floors")
+    public void the_elevator_is_initialized_with_floors(Integer maxFloor) {
+        elevator = new Elevator(maxFloor);
+    }
+
+    @Then("the elevator should report it can visit floors {int} through {int}")
+    public void the_elevator_should_report_it_can_visit_floors_through(Integer min, Integer max) {
+        java.util.List<Integer> floors = elevator.getFloors();
+        assertEquals(max - min + 1, floors.size());
+        assertTrue(floors.contains(min));
+        assertTrue(floors.contains(max));
+    }
 }
