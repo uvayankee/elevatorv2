@@ -38,27 +38,27 @@ was to build up a pipeline.  While this has no "production" endpoint, "The pipel
 mantra I hold dear and a goal I always strive for.
 
 ## Preliminaries
-- [ ] The project should be built in Java
-- [ ] The project should be built using Gradle
-- [ ] The project should be built using as little mocking as possible
-- [ ] The project should be built using a BDD pattern & framework
-- [ ] The project should be built using a CI/CD pipeline in GitHub Actions
-- [ ] The project should be built using trunk based development, with small, atomic commits, and a check on the pipeline via gh
+- [x] The project should be built in Java
+- [x] The project should be built using Gradle
+- [x] The project should be built using as little mocking as possible
+- [x] The project should be built using a BDD pattern & framework
+- [x] The project should be built using a CI/CD pipeline in GitHub Actions
+- [x] The project should be built using trunk based development, with small, atomic commits, and a check on the pipeline via gh
 
 ## Requirements
-- [ ] Starts at floor 1 with doors open
-- [ ] Elevator needs to know what floor its on
-- [ ] Elevator needs to provide a set of floors it can visit
-- [ ] Elevator needs to accept a floor choice
-- [ ] Elevator needs to go to that floor
-- [ ] Elevator needs to open doors after it arrives at the destination floor
-- [ ] Elevator needs to close doors before it starts moving
-- [ ] Elevator needs to more one floor at a time (actionlog for now)
-- [ ] Elevator needs to be callable to a floor
-- [ ] Elevator needs to stop on floors it is called to if they are on the way (request for same direction)
-- [ ] Elevator needs to prioritize current passengers over calls
-- [ ] Elevator needs to run on its own
-- [ ] Elevator needs to validate floor requests
+- [x] Starts at floor 1 with doors open
+- [x] Elevator needs to know what floor its on
+- [x] Elevator needs to provide a set of floors it can visit
+- [x] Elevator needs to accept a floor choice
+- [x] Elevator needs to go to that floor
+- [x] Elevator needs to open doors after it arrives at the destination floor
+- [x] Elevator needs to close doors before it starts moving
+- [x] Elevator needs to more one floor at a time (actionlog for now)
+- [x] Elevator needs to be callable to a floor
+- [x] Elevator needs to stop on floors it is called to if they are on the way (request for same direction)
+- [x] Elevator needs to prioritize current passengers over calls
+- [x] Elevator needs to run on its own
+- [x] Elevator needs to validate floor requests
 
 ## Future Work
 - [ ] Elevator needs a bank with external call buttons
